@@ -1,0 +1,330 @@
+:root {
+  --neon-yellow: #EEFF00;
+  --electric-pink: #FF2D7C;
+  --cyber-blue: #00F0FF;
+  --deep-purple: #1a0a2e;
+  --darker-purple: #0d0518;
+  --cream: #FFF8E7;
+  --toxic-green: #39FF14;
+  --orange-pop: #FF6B35;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(135deg, var(--darker-purple) 0%, var(--deep-purple) 100%);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.game-title {
+  font-family: 'Bangers', cursive;
+  font-size: 3rem;
+  color: var(--neon-yellow);
+  text-shadow: 
+    0 0 10px var(--neon-yellow),
+    0 0 20px var(--neon-yellow),
+    0 0 30px var(--neon-yellow);
+  margin-bottom: 15px;
+  letter-spacing: 3px;
+}
+
+.score-display {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--cyber-blue);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 
+    0 0 20px rgba(0, 240, 255, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.score-item .label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  color: var(--cyber-blue);
+  text-shadow: 0 0 10px var(--cyber-blue);
+}
+
+.score-item .value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.2rem;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 10px var(--neon-yellow);
+}
+
+.game-area {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.game-board {
+  position: relative;
+  border: 3px solid var(--electric-pink);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 0 30px rgba(255, 45, 124, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+#gameCanvas {
+  display: block;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 7px;
+}
+
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  backdrop-filter: blur(5px);
+}
+
+.game-overlay.hidden {
+  display: none;
+}
+
+.overlay-content {
+  text-align: center;
+  padding: 30px;
+}
+
+#overlayTitle {
+  font-family: 'Bangers', cursive;
+  font-size: 2.5rem;
+  color: var(--neon-yellow);
+  text-shadow: 
+    0 0 10px var(--neon-yellow),
+    0 0 20px var(--neon-yellow);
+  margin-bottom: 20px;
+}
+
+#overlayText {
+  font-size: 1.2rem;
+  color: var(--cyber-blue);
+  text-shadow: 0 0 10px var(--cyber-blue);
+  margin-bottom: 30px;
+}
+
+.controls-info {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: var(--cream);
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.next-piece {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--toxic-green);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 
+    0 0 20px rgba(57, 255, 20, 0.3),
+    inset 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.next-piece h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: var(--toxic-green);
+  text-shadow: 0 0 10px var(--toxic-green);
+  margin-bottom: 15px;
+}
+
+#nextCanvas {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.control-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  padding: 12px 20px;
+  background: linear-gradient(45deg, var(--deep-purple), var(--electric-pink));
+  border: 2px solid var(--electric-pink);
+  border-radius: 8px;
+  color: var(--cream);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 0 15px rgba(255, 45, 124, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 5px 20px rgba(255, 45, 124, 0.5),
+    inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+.mobile-controls {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.control-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mobile-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1rem;
+  padding: 15px 20px;
+  background: linear-gradient(45deg, var(--deep-purple), var(--cyber-blue));
+  border: 2px solid var(--cyber-blue);
+  border-radius: 8px;
+  color: var(--cream);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 0 15px rgba(0, 240, 255, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  min-width: 60px;
+}
+
+.mobile-btn:active {
+  transform: scale(0.95);
+  box-shadow: 
+    0 0 20px rgba(0, 240, 255, 0.6),
+    inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 10px;
+  }
+  
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .game-area {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .side-panel {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .mobile-controls {
+    display: flex;
+  }
+  
+  .score-display {
+    padding: 10px;
+  }
+  
+  .score-item .label {
+    font-size: 0.6rem;
+  }
+  
+  .score-item .value {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #gameCanvas {
+    width: 250px;
+    height: 500px;
+  }
+  
+  .game-title {
+    font-size: 1.5rem;
+  }
+  
+  .side-panel {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .next-piece {
+    padding: 15px;
+  }
+  
+  #nextCanvas {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Animation keyframes */
+@keyframes glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.glow {
+  animation: glow 2s ease-in-out infinite;
+}
